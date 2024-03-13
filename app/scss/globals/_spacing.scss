@@ -1,0 +1,192 @@
+@use '../util/media';
+
+$margin-values: (0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem,
+    auto: auto);
+
+
+$margin-directions: (t: top,
+    l: left,
+    r: right,
+    b: bottom);
+
+
+@each $direction-key,
+$direction-value in $margin-directions {
+
+    @each $key,
+    $value in $margin-values {
+        @if ($direction-key==t) {
+
+            .my-#{$key},
+            .m#{$direction-key}-#{$key} {
+                margin-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==b) {
+
+            .my-#{$key},
+            .m#{$direction-key}-#{$key} {
+                margin-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==l) {
+
+            .mx-#{$key},
+            .m#{$direction-key}-#{$key} {
+                margin-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==r) {
+
+            .mx-#{$key},
+            .m#{$direction-key}-#{$key} {
+                margin-#{$direction-value}: $value !important;
+            }
+        }
+
+    }
+}
+
+$padding-values: (0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem);
+
+
+$padding-directions: (t: top,
+    l: left,
+    r: right,
+    b: bottom);
+
+@each $direction-key,
+$direction-value in $padding-directions {
+
+    @each $key,
+    $value in $padding-values {
+        @if ($direction-key==t) {
+
+            .py-#{$key},
+            .p#{$direction-key}-#{$key} {
+                padding-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==b) {
+
+            .py-#{$key},
+            .p#{$direction-key}-#{$key} {
+                padding-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==l) {
+
+            .px-#{$key},
+            .p#{$direction-key}-#{$key} {
+                padding-#{$direction-value}: $value !important;
+            }
+        }
+
+        @if ($direction-key==r) {
+
+            .px-#{$key},
+            .p#{$direction-key}-#{$key} {
+                padding-#{$direction-value}: $value !important;
+            }
+        }
+    }
+}
+
+@each $size,
+$mv in media.$breakpoints {
+    @media (min-width: $mv) {
+
+        @each $direction-key,
+        $direction-value in $margin-directions {
+
+            @each $key,
+            $value in $margin-values {
+                @if ($direction-key==t) {
+
+                    .my-#{$size}-#{$key},
+                    .m#{$direction-key}-#{$size}-#{$key} {
+                        margin-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==b) {
+
+                    .my-#{$size}-#{$key},
+                    .m#{$direction-key}-#{$size}-#{$key} {
+                        margin-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==l) {
+
+                    .mx-#{$size}-#{$key},
+                    .m#{$direction-key}-#{$size}-#{$key} {
+                        margin-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==r) {
+
+                    .mx-#{$size}-#{$key},
+                    .m#{$direction-key}-#{$size}-#{$key} {
+                        margin-#{$direction-value}: $value !important;
+                    }
+                }
+            }
+        }
+
+        @each $direction-key,
+        $direction-value in $padding-directions {
+
+            @each $key,
+            $value in $padding-values {
+                @if ($direction-key==t) {
+
+                    .py-#{$size}-#{$key},
+                    .p#{$direction-key}-#{$size}-#{$key} {
+                        padding-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==b) {
+
+                    .py-#{$size}-#{$key},
+                    .p#{$direction-key}-#{$size}-#{$key} {
+                        padding-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==l) {
+
+                    .px-#{$size}-#{$key},
+                    .p#{$direction-key}-#{$size}-#{$key} {
+                        padding-#{$direction-value}: $value !important;
+                    }
+                }
+
+                @if ($direction-key==r) {
+
+                    .px-#{$size}-#{$key},
+                    .p#{$direction-key}-#{$size}-#{$key} {
+                        padding-#{$direction-value}: $value !important;
+                    }
+                }
+            }
+        }
+    }
+}

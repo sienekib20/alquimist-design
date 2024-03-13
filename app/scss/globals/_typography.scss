@@ -1,0 +1,161 @@
+@use 'colors';
+
+/*!
+* Typography
+*/
+
+$breakpoints: ('sm': 575.98px,
+    'md': 767.98px,
+    'lg': 991.98px,
+    'xl': 1199.98px,
+    'xxl': 1399.98px);
+
+@each $name,
+$value in colors.$defaults {
+    .text-#{$name} {
+        color: $value !important;
+    }
+}
+
+$alignments: ('align': ('left', 'right', 'justify', 'center'
+    ),
+    'decoration': ('none', 'underline', 'overline', 'line-through'
+    ),
+    'overflow': ('clip', 'ellipsis', 'unset', 'initial', 'inherit'
+    ),
+    'transform': ('none', 'capitalize', 'lowercase', 'uppercase'
+    ));
+
+@each $align,
+$content in $alignments {
+    @each $align-content in $content {
+        .text-#{$align-content} {
+            text-#{$align}: unquote($align-content) !important;
+        }
+    }
+}
+
+$i: 100;
+
+@while $i <=900 {
+    .fw-#{$i} {
+        font-weight: #{$i} !important;
+    }
+
+    $i: $i+100;
+}
+
+$font: ('fs': ('normal',
+        'italic',
+        'oblique'
+    ),
+    'fv': ('normal',
+        'small-caps'
+    ));
+
+
+@each $key,
+$data in $font {
+    @each $item in $data {
+        .#{$key}-#{$item} {
+            @if ($key=='fs') {
+                font-style: $item !important;
+            }
+
+            @if ($key=='fv') {
+                font-variant: $item !important;
+            }
+        }
+    }
+}
+
+$ls: 0.1;
+$iterator: 1;
+
+@while $ls <=1 {
+    .ls-#{$iterator} {
+        letter-spacing: #{$ls}+'px' !important;
+    }
+
+    $ls: $ls+0.1;
+    $iterator: $iterator+1;
+}
+
+$white-space: (normal, nowrap, pre, pre-wrap, pre-line);
+$word-break: (normal, break-all);
+
+@each $ws in $white-space {
+    .ws-#{$ws} {
+        white-space: $ws !important;
+    }
+}
+
+@each $wb in $word-break {
+    .wb-#{$wb} {
+        white-space: $wb !important;
+    }
+}
+
+/**
+Media query
+*/
+@each $size,
+$value in $breakpoints {
+    @media (min-width: $value) {
+
+        @each $name,
+        $value in colors.$defaults {
+            .text-#{$size}-#{$name} {
+                color: $value !important;
+            }
+        }
+
+        @each $align,
+        $content in $alignments {
+            @each $align-content in $content {
+                .text-#{$size}-#{$align-content} {
+                    text-#{$align}: unquote($align-content) !important;
+                }
+            }
+        }
+
+        @each $key,
+        $data in $font {
+            @each $item in $data {
+                .#{$key}-#{$size}-#{$item} {
+                    @if ($key=='fs') {
+                        font-style: $item !important;
+                    }
+
+                    @if ($key=='fv') {
+                        font-variant: $item !important;
+                    }
+                }
+            }
+        }
+
+        $ls: 0.1;
+        $iterator: 1;
+
+        @while $ls <=1 {
+            .ls-#{$size}-#{$iterator} {
+                letter-spacing: #{$ls}+'px' !important;
+            }
+
+            $ls: $ls+0.1;
+            $iterator: $iterator+1;
+        }
+
+        @each $ws in $white-space {
+            .ws-#{$size}-#{$ws} {
+                white-space: $ws !important;
+            }
+        }
+
+        @each $wb in $word-break {
+            .wb-#{$size}-#{$wb} {
+                white-space: $wb !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@use '../util/media';
+
+@for $i from 0 through 10 {
+    .op-#{$i} {
+        opacity: 0.1 * $i;
+    }
+}
+
+@each $size, $value in media.$breakpoints {
+    @media (min-width: $value) {
+        @for $i from 0 through 10 {
+            .op-#{$size}-#{$i} {
+                opacity: 0.1 * $i;
+            }
+        }
+    }
+}

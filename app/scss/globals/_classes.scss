@@ -1,0 +1,102 @@
+@use '../util/media';
+
+$contador: 5;
+
+@while $contador <=100 {
+    $value: $contador + '%';
+
+    .h-#{$contador} {
+        height: unquote($value) !important;
+    }
+
+    $contador: $contador+5;
+}
+
+$contador: 5;
+
+@while $contador <=100 {
+    $value: $contador + 'vh';
+
+    .vh-#{$contador} {
+        height: unquote($value) !important;
+    }
+
+    $contador: $contador+5;
+}
+
+$contador: 5;
+
+@while $contador <=100 {
+    $value: $contador + '%';
+
+    .w-#{$contador} {
+        width: unquote($value) !important;
+    }
+
+    $contador: $contador+5;
+}
+
+$contador: 5;
+
+@while $contador <=100 {
+    $value: $contador + 'vw';
+
+    .vw-#{$contador} {
+        width: unquote($value) !important;
+    }
+
+    $contador: $contador+5;
+}
+
+@each $size,
+$value in media.$breakpoints {
+    @media (min-width: $value) {
+        $contador: 5;
+
+        @while $contador <=100 {
+            $value: $contador + '%';
+
+            .h-#{$size}-#{$contador} {
+                height: unquote($value) !important;
+            }
+
+            $contador: $contador+5;
+        }
+
+        $contador: 5;
+
+        @while $contador <=100 {
+            $value: $contador + 'vh';
+
+            .vh-#{$size}-#{$contador} {
+                height: unquote($value) !important;
+            }
+
+            $contador: $contador+5;
+        }
+
+        $contador: 5;
+
+        @while $contador <=100 {
+            $value: $contador + '%';
+
+            .w-#{$size}-#{$contador} {
+                width: unquote($value) !important;
+            }
+
+            $contador: $contador+5;
+        }
+
+        $contador: 5;
+
+        @while $contador <=100 {
+            $value: $contador + 'vw';
+
+            .vw-#{$size}-#{$contador} {
+                width: unquote($value) !important;
+            }
+
+            $contador: $contador+5;
+        }
+    }
+}
