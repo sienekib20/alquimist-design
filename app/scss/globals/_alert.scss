@@ -1,0 +1,54 @@
+.mkalert {
+    position: fixed;
+    bottom: 2rem;
+    width: 420px;
+    max-width: 100%;
+    min-height: 50px;
+    padding: 1rem;
+    border-radius: 4px;
+    z-index: 1111111111111111111;
+    transition: left 0.2s ease-in-out;
+}
+
+.alert-dark {
+    background-color: #000;
+}
+
+.alert-left {
+    left: -110%;
+}
+
+.alert-right {
+    right: -110%;
+}
+
+.alert-left.show {
+    left: 10px;
+}
+
+.alert-right.show {
+    left: 10px;
+}
+
+.alert-timing {
+    width: 100%;
+    height: 4px;
+    display: block;
+    position: relative;
+}
+
+.alert-timing .alert-timing-progress {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.alert-timing-light {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.alert-timing-light .alert-timing-progress {
+    background-color: #fff;
+}

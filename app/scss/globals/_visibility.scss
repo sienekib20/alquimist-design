@@ -6,11 +6,32 @@
     }
 }
 
-@each $size, $value in media.$breakpoints {
+@for $i from 1 through 3 {
+    .omit-text-#{$i} {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: #{$i};
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+    }
+}
+
+
+@each $size,
+$value in media.$breakpoints {
     @media (min-width: $value) {
         @for $i from 0 through 10 {
             .op-#{$size}-#{$i} {
                 opacity: 0.1 * $i;
+            }
+        }
+        @for $i from 1 through 3 {
+            .omit-text-#{$size}-#{$i} {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: #{$i};
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
             }
         }
     }
