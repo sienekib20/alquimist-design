@@ -3,7 +3,6 @@ const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const header = require('gulp-header');
 const package = require('./package.json');
-const autoprefixer = require('gulp-autoprefixer');
 const watch = require('gulp-watch');
 
 const banner = `
@@ -17,9 +16,8 @@ const banner = `
 `;
 
 function compileSass() {
-   return gulp.src('scss/typos.scss')
+   return gulp.src('scss/main.scss')
       .pipe(sourcemaps.init())
-      .pipe(autoprefixer())
       .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
       .pipe(header(banner))
       .pipe(sourcemaps.write('.'))
@@ -27,7 +25,7 @@ function compileSass() {
 }
 
 function minifySass() {
-   return gulp.src('scss/typos.scss')
+   return gulp.src('scss/main.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
       .pipe(header(banner))

@@ -1,0 +1,4 @@
+.vscode
+.phpstorm
+.env
+/node_modules/
