@@ -1,0 +1,75 @@
+$diplays: (
+   block: block,
+   flex: flex,
+   flexible: flex,
+   gird: grid,
+   table: table,
+   inline: inline,
+   list-item: list-item,
+   table-cell: table-cell,
+   table-column: table-column,
+   table-column-group: table-column-group,
+   table-footer-group: table-footer-group,
+   table-header-group: table-header-group,
+   table-row: table-row,
+   flow-root: flow-root,
+   hidden: none
+);
+
+$floats: (
+   float-start: start,
+   float-end: end,
+   float-left: left,
+   float-right: right,
+   float-none: none
+);
+
+$clears: (
+   clear-start: start,
+   clear-end: end,
+   clear-left: left,
+   clear-right: right,
+   clear-both: both,
+   clear-none: none
+);
+
+@each $display, $value in $diplays {
+   .#{$display} {
+      display: $value;
+   }
+}
+
+@each $float, $value in $floats {
+   .#{$float} {
+      float: $value;
+   }
+}
+
+@each $clear, $value in $clears {
+   .#{$clear} {
+      clear: $value;
+   }
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      @each $display, $value in $diplays {
+         .#{$prefix}\:#{$display} {
+            display: $value;
+         }
+      }
+
+      @each $float, $value in $floats {
+         .#{$prefix}\:#{$float} {
+            float: $value;
+         }
+      }
+
+      @each $clear, $value in $clears {
+         .#{$prefix}\:#{$clear} {
+            clear: $value;
+         }
+      }
+   }
+}
+;

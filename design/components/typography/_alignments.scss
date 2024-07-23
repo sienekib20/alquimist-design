@@ -1,0 +1,40 @@
+$type-alignments: (
+   '',
+   'last'
+);
+$alignments: (
+   auto,
+   center,
+   end,
+   justify,
+   left,
+   right,
+   start,
+);
+
+$wraps: (
+   balance,
+   wrap,
+   nowrap,
+   pretty,
+   stable
+);
+
+@each $type in $type-alignments {
+   $build: text-align;
+   @if ($type !='') {
+      $build: $build + '-' + $type;
+   }
+   @each $alignment in $alignments {
+      .text-#{$alignment} {
+         #{$build}: $alignment;
+      }
+   }
+
+}
+
+@each $wrap in $wraps {
+   .text-#{$wrap} {
+      text-wrap: $wrap;
+   }
+}

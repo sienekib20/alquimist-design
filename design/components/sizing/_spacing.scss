@@ -1,0 +1,139 @@
+$sinals: (
+   '',
+   n
+);
+
+$offsets: (
+   p: padding,
+   m: margin
+);
+
+$sufixs: (
+   '': '',
+   't': 'top',
+   'r': 'right',
+   'l': 'left',
+   'b': 'bottom'
+);
+
+$initialValue: 0;
+$stepSizes: 0, 0.5, 1, 1.5, 3, 4.5, 6, 7.5, 9, 10.5, 12, 13.5, 15, 16.5, 18, 19.5;
+$multiplier: 0.446; // Ajuste conforme necessário para escalonar os incrementos
+
+@each $sinal in $sinals {
+
+   @each $offsetKey, $offset in $offsets {
+      @each $sufixKey, $sufix in $sufixs {
+         $offsetClass: $offsetKey;
+         $offsetProperty: $offset;
+   
+         @if $sufixKey !='' {
+            $offsetClass: #{$offsetClass}#{$sufixKey};
+            $offsetProperty: #{$offsetProperty}-#{$sufix};
+         }
+   
+         @for $i from 0 to 16 {
+            $buildItem: '';
+            
+            $value: ($initialValue + nth($stepSizes, $i + 1)) * $multiplier +1rem;
+            
+            @if $sinal != '' {
+               $buildItem: $buildItem + $sinal;
+               $value: calc($value * -1);
+            }
+            $buildItem: $buildItem + $i;
+            
+
+            $offsetTarget: m;
+            @if ($offsetKey == p) {
+               $offsetTarget: p;
+            } 
+
+            @if $sufixKey =='t' or $sufixKey =='b' {
+               .#{$offsetClass}-#{$buildItem},
+               .#{$offsetTarget}y-#{$buildItem} {
+                  #{$offsetProperty}: $value;
+               }
+            }
+   
+            @else if $sufixKey =='l' or $sufixKey =='r' {
+   
+               .#{$offsetClass}-#{$buildItem},
+               .#{$offsetTarget}x-#{$buildItem} {
+                  #{$offsetProperty}: $value;
+               }
+            }
+   
+            @else {
+               .#{$offsetClass}-#{$buildItem} {
+                  #{$offsetProperty}: $value;
+               }
+            }
+         }
+      }
+   }
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+
+      @each $sinal in $sinals {
+      
+            @each $offsetKey, $offset in $offsets {
+               @each $sufixKey, $sufix in $sufixs {
+                  $offsetClass: $offsetKey;
+                  $offsetProperty: $offset;
+      
+                  @if $sufixKey !='' {
+                     $offsetClass: #{$offsetClass}#{$sufixKey};
+                     $offsetProperty: #{$offsetProperty}-#{$sufix};
+                  }
+      
+                  @for $i from 0 to 16 {
+                     $buildItem: '';
+      
+                     $value: (
+                        $initialValue + nth($stepSizes, $i + 1)) * $multiplier +1rem;
+      
+                     @if $sinal !='' {
+                        $buildItem: $buildItem + $sinal;
+                        $value: calc($value * -1
+                        );
+                  }
+      
+                  $buildItem: $buildItem + $i;
+      
+      
+                  $offsetTarget: m;
+      
+                  @if ($offsetKey ==p) {
+                     $offsetTarget: p;
+                  }
+      
+                  @if $sufixKey =='t' or $sufixKey =='b' {
+      
+                     .#{$prefix}\:#{$offsetClass}-#{$buildItem},
+                     .#{$prefix}\:#{$offsetTarget}y-#{$buildItem} {
+                        #{$offsetProperty}: $value;
+                     }
+                  }
+      
+                  @else if $sufixKey =='l' or $sufixKey =='r' {
+      
+                     .#{$prefix}\:#{$offsetClass}-#{$buildItem},
+                     .#{$prefix}\:#{$offsetTarget}x-#{$buildItem} {
+                        #{$offsetProperty}: $value;
+                     }
+                  }
+      
+                  @else {
+                     .#{$prefix}\:#{$offsetClass}-#{$buildItem} {
+                        #{$offsetProperty}: $value;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,47 @@
+$object-fits: (
+   object-content: content,
+   object-cover: cover,
+   object-fill: fill,
+   object-none: none,
+   object-scale-down: scale-down
+);
+
+$object-positions: (
+   object-bottom: bottom,
+   object-center: center,
+   object-top: top,
+   object-left: left,
+   object-right: right
+);
+
+@each $object-fit, $value in $object-fits {
+   .#{$object-fit} {
+      -o-object-fit: $value !important;
+      object-fit: $value !important;
+   }
+}
+
+@each $object-position, $value in $object-positions {
+   .#{$object-position} {
+      -o-object-position: $value !important;
+      object-position: $value !important;
+   }
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      @each $object-fit, $value in $object-fits {
+         .#{$prefix}\:#{$object-fit} {
+            -o-object-fit: $value;
+            object-fit: $value;
+         }
+      }
+
+      @each $object-position, $value in $object-positions {
+         .#{$prefix}\:#{$object-position} {
+            -o-object-position: $value;
+            object-position: $value;
+         }
+      }
+   }
+}

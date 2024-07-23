@@ -1,0 +1,58 @@
+$visibilitys: (
+   visible: visible,
+   hidden: hidden,
+   collapse: collapse,
+   inherit: inherit,
+   initial: initial
+);
+
+@each $class, $value in $visibilitys {
+   .visibility-#{$class} {
+      visibility: $value;
+   }
+}
+
+.z-auto {
+   z-index: auto;
+}
+
+.z-modal {
+   z-index: 19000;
+}
+
+.z-navbar {
+   z-index: 19001;
+}
+
+@for $i from 0 through 9 {
+   .z-#{$i} {
+      z-index: $i * 1000;
+   }
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      @each $class, $value in $visibilitys {
+         .#{$prefix}\:visibility-#{$class} {
+            visibility: $value;
+         }
+      }
+      .#{$prefix}\:z-auto {
+         z-index: auto;
+      }
+
+      .#{$prefix}\:z-modal {
+         z-index: 19000;
+      }
+
+      .#{$prefix}\:z-navbar {
+         z-index: 19001;
+      }
+
+      @for $i from 0 through 9 {
+         .#{$prefix}\:z-#{$i} {
+            z-index: $i * 1000;
+         }
+      }
+   }
+}

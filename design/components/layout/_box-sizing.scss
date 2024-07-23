@@ -1,0 +1,19 @@
+.border-box {
+   box-sizing: border-box;
+}
+
+.content-box {
+   box-sizing: content-box;
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      .#{$prefix}\:border-box {
+         box-sizing: border-box !important;
+      }
+      
+      .#{$prefix}\:content-box {
+         box-sizing: content-box !important;
+      }
+   }
+}

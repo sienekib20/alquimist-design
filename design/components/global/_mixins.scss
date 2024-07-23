@@ -1,0 +1,41 @@
+@mixin media-query($max-width) {
+   @media (max-width: $max-width) {
+      @content
+   }
+}
+
+;
+
+// Columns Mixins
+
+@mixin node() {
+   display: flex;
+   flex-wrap: wrap;
+   margin-left: -$x-space;
+   margin-right: -$x-space;
+}
+
+;
+
+@mixin node-colunits-count($divider) {
+   flex: 0 0 calc(100% / $divider);
+   max-width: calc(100% / $divider);
+   padding-left: $x-space;
+   padding-right: $x-space;
+};
+
+
+
+@mixin node-colunits($prefix: '') {
+   $classname: '.node-colunits-';
+
+   @if ($prefix !='') {
+      $classname: '.' + $prefix + '\\:node-colunits-';
+   }
+
+   @for $i from 1 through 6 {
+      #{$classname}#{$i} > * {
+         @include node-colunits-count($i);
+      }
+   }
+}

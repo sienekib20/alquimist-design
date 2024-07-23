@@ -1,0 +1,77 @@
+$overflows: (
+   auto: auto,
+   hidden: hidden,
+   clip: clip,
+   visible: visible,
+   scroll: scroll
+);
+
+$eixos: (
+   '',
+   x,
+   y
+);
+
+$overscrolls: (
+   auto: auto,
+   contain: contain,
+   none: unset,
+   smooth: smooth,
+   initial: initial
+);
+
+@each $eixo in $eixos {
+   @each $classname, $overflow in $overflows {
+      $over: 'overflow';
+      $class: 'overflow';
+
+      @if ($eixo !='') {
+         $over: $over + '-' + $eixo;
+         $class: $class + '-' + $eixo + '-' + $classname;
+      }
+
+      @else {
+         $class: $class + '-' + $classname;
+      }
+
+      .#{$class} {
+         #{$over}: $overflow;
+      }
+   }
+}
+
+@each $index, $overscroll in $overscrolls {
+   .overscroll-#{$index} {
+      scroll-behavior: $overscroll ;
+   }
+}
+
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      @each $eixo in $eixos {
+         @each $classname, $overflow in $overflows {
+            $over: 'overflow';
+            $class: 'overflow';
+
+            @if ($eixo !='') {
+               $over: $over + '-' + $eixo;
+               $class: $class + '-' + $eixo + '-' + $classname;
+            }
+
+            @else {
+               $class: $class + '-' + $classname;
+            }
+
+            .#{$prefix}\:#{$class} {
+               #{$over}: $overflow;
+            }
+         }
+      }
+
+      @each $index, $overscroll in $overscrolls {
+         .#{$prefix}\:overscroll-#{$index} {
+            scroll-behavior: $overscroll;
+         }
+      }
+   }
+}

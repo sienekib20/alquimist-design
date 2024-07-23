@@ -1,0 +1,43 @@
+.node {
+   @include node();
+}
+
+@include node-colunits();
+@each $prefix, $width in $breakpoints {
+   @media (min-width: $width) {
+      @include node-colunits($prefix);
+   }
+}
+
+$colunits: '';
+
+@for $iterator from 1 through 12 {
+   $colunits: #{$colunits} + '.colunits-' + #{$iterator} + ',';
+   @each $prefix, $w in $breakpoints {
+      $colunits: $colunits + '.' + $prefix + '\\:colunits-'+ $iterator + ',';
+   }
+}
+$colunits: str-slice($colunits, 1, -2);
+
+#{$colunits} {
+   width: 100%;
+   padding-left: 16px;
+   padding-right: 16px;
+}
+
+@for $i from 1 through 12 {
+   .colunits-#{$i} {
+      flex: 0 0 calc($i * 8.333333333333333%);
+      max-width: calc($i * 8.333333333333333%);
+   }
+}
+@each $prefix, $w in $breakpoints {
+   @media (min-width: $w) {
+      @for $i from 1 through 12 {
+         .#{$prefix}\:colunits-#{$i} {
+            flex: 0 0 calc($i * 8.333333333333333%);
+            max-width: calc($i * 8.333333333333333%);
+         }
+      }
+   }
+}

@@ -1,0 +1,66 @@
+$widths: (
+   w: width,
+   min\:w: min-width,
+   max\:w: max-width,
+   h: height,
+   min\:h: min-height,
+   max\:h: max-height
+);
+
+
+@each $w, $property in $widths {
+
+   .#{$w}-auto {
+      #{$property}: auto;
+   }
+   
+   @for $i from 1 through 99 {
+      $v: $i +'%';
+      .#{$w}-#{$i} {
+         #{$property}: unquote($v);
+      }
+   }
+   
+   .#{$w}-full {
+      #{$property}: 100%;
+   }
+   
+   @for $i from 1 through 99 {
+      @if $w == h or $w == min\:h or $w == max\:h {
+         $v: $i + vh;
+         .#{$w}-screen-#{$i} {
+            #{$property}: unquote($v);
+         }
+      } @else {
+         $v: $i + vw;
+         .#{$w}-screen-#{$i} {
+            #{$property}: unquote($v);
+         }
+      }
+   }
+   
+   .#{$w}-screen-full {
+      #{$property}: 100vw;
+   }
+   
+   
+   .#{$w}-min {
+      #{$property}: -webkit-min-content;
+      #{$property}: -moz-min-content;
+      #{$property}: min-content;
+   }
+   
+   .#{$w}-max {
+      #{$property}: -webkit-max-content;
+      #{$property}: -moz-max-content;
+      #{$property}: max-content;
+   }
+   
+   .#{$w}-fit {
+      #{$property}: -webkit-fit-content;
+      #{$property}: -moz-fit-content;
+      #{$property}: fit-content;
+   }
+
+}   
+

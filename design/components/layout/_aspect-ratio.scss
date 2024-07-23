@@ -1,0 +1,17 @@
+@each $key, $aspect in $aspect-ratio-vars {
+   $ratio: map-get($aspect-ratio-vars, $key);
+   .aspect-#{$key} {
+      aspect-ratio: unquote($ratio);
+   }
+}
+
+@each $prefix, $width in $breakpoints {
+   @media (max-width: $width) {
+      @each $key, $aspect in $aspect-ratio-vars {
+         $ratio: map-get($aspect-ratio-vars, $key);
+         .#{$prefix}\:aspect-#{$key} {
+            aspect-ratio: unquote($ratio);
+         }
+      }
+   }
+}
